@@ -1,16 +1,16 @@
-# tabbed - tabbing interface
+# tabbed-k - tabbing interface
 # See LICENSE file for copyright and license details.
 
 include config.mk
 
-SRC = tabbed.c xembed.c
+SRC = tabbed-k.c xembed.c
 OBJ = ${SRC:.c=.o}
 BIN = ${OBJ:.o=}
 
 all: options ${BIN}
 
 options:
-	@echo tabbed build options:
+	@echo tabbed-k build options:
 	@echo "CFLAGS   = ${CFLAGS}"
 	@echo "LDFLAGS  = ${LDFLAGS}"
 	@echo "CC       = ${CC}"
@@ -31,35 +31,35 @@ config.h:
 
 clean:
 	@echo cleaning
-	@rm -f ${BIN} ${OBJ} tabbed-${VERSION}.tar.gz
+	@rm -f ${BIN} ${OBJ} tabbed-k-${VERSION}.tar.gz
 
 dist: clean
 	@echo creating dist tarball
-	@mkdir -p tabbed-${VERSION}
+	@mkdir -p tabbed-k-${VERSION}
 	@cp -R LICENSE Makefile README config.def.h config.mk \
-		tabbed.1 arg.h ${SRC} tabbed-${VERSION}
-	@tar -cf tabbed-${VERSION}.tar tabbed-${VERSION}
-	@gzip tabbed-${VERSION}.tar
-	@rm -rf tabbed-${VERSION}
+		tabbed-k.1 arg.h ${SRC} tabbed-k-${VERSION}
+	@tar -cf tabbed-k-${VERSION}.tar tabbed-k-${VERSION}
+	@gzip tabbed-k-${VERSION}.tar
+	@rm -rf tabbed-k-${VERSION}
 
 install: all
 	@echo installing executable files to ${DESTDIR}${PREFIX}/bin
 	@mkdir -p "${DESTDIR}${PREFIX}/bin"
 	@cp -f ${BIN} "${DESTDIR}${PREFIX}/bin"
-	@chmod 755 "${DESTDIR}${PREFIX}/bin/tabbed"
+	@chmod 755 "${DESTDIR}${PREFIX}/bin/tabbed-k"
 	@echo installing manual pages to ${DESTDIR}${MANPREFIX}/man1
 	@mkdir -p "${DESTDIR}${MANPREFIX}/man1"
-	@sed "s/VERSION/${VERSION}/g" < tabbed.1 > "${DESTDIR}${MANPREFIX}/man1/tabbed.1"
-	@chmod 644 "${DESTDIR}${MANPREFIX}/man1/tabbed.1"
+	@sed "s/VERSION/${VERSION}/g" < tabbed-k.1 > "${DESTDIR}${MANPREFIX}/man1/tabbed-k.1"
+	@chmod 644 "${DESTDIR}${MANPREFIX}/man1/tabbed-k.1"
 	@sed "s/VERSION/${VERSION}/g" < xembed.1 > "${DESTDIR}${MANPREFIX}/man1/xembed.1"
 	@chmod 644 "${DESTDIR}${MANPREFIX}/man1/xembed.1"
 
 uninstall:
 	@echo removing executable files from ${DESTDIR}${PREFIX}/bin
-	@rm -f "${DESTDIR}${PREFIX}/bin/tabbed"
+	@rm -f "${DESTDIR}${PREFIX}/bin/tabbed-k"
 	@rm -f "${DESTDIR}${PREFIX}/bin/xembed"
 	@echo removing manual pages from ${DESTDIR}${MANPREFIX}/man1
-	@rm -f "${DESTDIR}${MANPREFIX}/man1/tabbed.1"
+	@rm -f "${DESTDIR}${MANPREFIX}/man1/tabbed-k.1"
 	@rm -f "${DESTDIR}${MANPREFIX}/man1/xembed.1"
 
 .PHONY: all options clean dist install uninstall
